@@ -1,0 +1,171 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ .Values.deployment.namespace }}
+  name: {{ .Values.deployment.name }}
+  labels:
+    {{- include "helm-beacon-chain.labels" . | nindent 4 }}
+spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: {{ .Values.deployment.maxUnavailable }}
+      maxSurge: {{ .Values.deployment.maxSurge }}
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      {{- include "helm-beacon-chain.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "helm-beacon-chain.selectorLabels" . | nindent 8 }}
+      annotations:
+        timestamp: '{{ now }}'
+    spec:
+      initContainers:
+      - name: copy-genesis
+        image: busybox
+        command: ['sh', '-c', 'cp /config/genesis.json /execution/genesis.json && chmod 666 /execution/genesis.json']
+        volumeMounts:
+        - name: execution
+          mountPath: /execution
+        - name: execution-config
+          mountPath: /config
+
+      - name: copy-consensus
+        image: busybox
+        command: ['sh', '-c', 'cp /config/config.yml /consensus/config.yml && chmod 666 /consensus/config.yml']
+        volumeMounts:
+        - name: consensus
+          mountPath: /consensus
+        - name: consensus-config
+          mountPath: /config
+
+      - name: {{ .Values.initGenesisContainer.name }}
+        image: {{ .Values.initGenesisContainer.image }} 
+        imagePullPolicy: {{ .Values.initGenesisContainer.imagePullPolicy }}
+        resources:
+          requests:
+            memory: "{{ .Values.initGenesisContainer.resources.requests.memory }}"
+            cpu: "{{ .Values.initGenesisContainer.resources.requests.cpu }}"
+        args: {{ range .Values.initGenesisContainer.args }}
+          - "{{ . }}"
+          {{ end }}
+        volumeMounts:
+        - name: consensus 
+          mountPath: "/consensus"
+        - name: execution 
+          mountPath: "/execution"
+        
+      - name: {{ .Values.initGethRemoveDbContainer.name }}
+        image: {{ .Values.initGethRemoveDbContainer.image }} 
+        imagePullPolicy: {{ .Values.initGethRemoveDbContainer.imagePullPolicy }}
+        resources:
+          requests:
+            memory: "{{ .Values.initGethRemoveDbContainer.resources.requests.memory }}"
+            cpu: "{{ .Values.initGethRemoveDbContainer.resources.requests.cpu }}"
+        args: {{ range .Values.initGethRemoveDbContainer.args }}
+          - "{{ . }}"
+          {{ end }}
+        volumeMounts:
+        - name: execution 
+          mountPath: "/execution"
+        
+      - name: {{ .Values.initGethGenesisContainer.name }}
+        image: {{ .Values.initGethGenesisContainer.image }} 
+        imagePullPolicy: {{ .Values.initGethGenesisContainer.imagePullPolicy }}
+        resources:
+          requests:
+            memory: "{{ .Values.initGethGenesisContainer.resources.requests.memory }}"
+            cpu: "{{ .Values.initGethGenesisContainer.resources.requests.cpu }}"
+        args: {{range .Values.initGethGenesisContainer.args }}
+          - "{{ . }}"
+          {{ end }}
+        volumeMounts:
+        - name: execution 
+          mountPath: "/execution"
+
+      containers:
+      - name: {{ .Values.beaconChainContainer.name }}
+        image: {{ .Values.beaconChainContainer.image }} 
+        imagePullPolicy: {{ .Values.beaconChainContainer.imagePullPolicy }}
+        resources:
+          requests:
+            memory: "{{ .Values.beaconChainContainer.resources.requests.memory }}"
+            cpu: "{{ .Values.beaconChainContainer.resources.requests.cpu }}"
+        ports:
+        - containerPort: {{ .Values.service.beaconChain.port1 }}
+        - containerPort: {{ .Values.service.beaconChain.port2 }}
+        - containerPort: {{ .Values.service.beaconChain.port3 }}
+        - containerPort: {{ .Values.service.beaconChain.port4 }}
+        - containerPort: {{ .Values.service.beaconChain.port5 }}
+        args: {{range .Values.beaconChainContainer.args }}
+          - "{{ . }}"
+          {{ end }}
+        volumeMounts:
+        - name: consensus 
+          mountPath: "/consensus"
+        - name: execution 
+          mountPath: "/execution"
+        
+      - name: {{ .Values.gethContainer.name }}
+        image: {{ .Values.gethContainer.image }} 
+        imagePullPolicy: {{ .Values.gethContainer.imagePullPolicy }}
+        resources:
+          requests:
+            memory: "{{ .Values.gethContainer.resources.requests.memory }}"
+            cpu: "{{ .Values.gethContainer.resources.requests.cpu }}"
+        ports:
+        - containerPort: {{ .Values.service.geth.port1 }}
+        - containerPort: {{ .Values.service.geth.port2 }}
+        - containerPort: {{ .Values.service.geth.port3 }}
+        args: {{ range .Values.gethContainer.args }}
+          - "{{ . }}"
+          {{ end }}
+        volumeMounts:
+        - name: execution 
+          mountPath: "/execution"
+        - name: geth-password
+          mountPath: "/execution/geth_password.txt"
+          subPath: geth_password.txt
+        - name: geth-keystore
+          mountPath: "/execution/keystore/UTC--2024-08-18T06-48-35.810191000Z--7d441d18b79898449be8b05d1077308bc563669c"
+          subPath: UTC--2024-08-18T06-48-35.810191000Z--7d441d18b79898449be8b05d1077308bc563669c
+
+      - name: {{ .Values.validatorContainer.name }}
+        image: {{ .Values.validatorContainer.image }} 
+        imagePullPolicy: {{ .Values.validatorContainer.imagePullPolicy }}
+        resources:
+          requests:
+            memory: "{{ .Values.validatorContainer.resources.requests.memory }}"
+            cpu: "{{ .Values.validatorContainer.resources.requests.cpu }}"
+        args: {{ range .Values.validatorContainer.args }}
+          - "{{ . }}"
+          {{ end }}
+        volumeMounts:
+        - name: consensus 
+          mountPath: "/consensus"
+
+      volumes:
+      - name: consensus 
+        emptyDir: {}
+
+      - name: execution 
+        emptyDir: {}
+
+      - name: consensus-config
+        configMap:
+          name: consensus-config
+
+      - name: execution-config
+        configMap:
+          name: execution-genesis
+
+      - name: geth-password
+        configMap:
+          name: geth-password
+
+      - name: geth-keystore
+        configMap:
+          name: geth-keystore

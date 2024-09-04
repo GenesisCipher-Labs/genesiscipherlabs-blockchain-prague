@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.deployment.name }}
+  namespace: {{ .Values.deployment.namespace }}
+  labels:
+    {{- include "helm-beacon-chain.labels" . | nindent 4 }}
+spec:
+  type: NodePort
+  ports:
+    - name: beacon-chain-port1
+      port: {{ .Values.service.beaconChain.port1 }}
+      targetPort: {{ .Values.service.beaconChain.port1 }}
+      protocol: TCP
+    - name: beacon-chain-port2
+      port: {{ .Values.service.beaconChain.port2 }}
+      targetPort: {{ .Values.service.beaconChain.port2 }}
+      protocol: TCP
+    - name: beacon-chain-port3
+      port: {{ .Values.service.beaconChain.port3 }}
+      targetPort: {{ .Values.service.beaconChain.port3 }}
+      protocol: TCP
+    - name: beacon-chain-port4
+      port: {{ .Values.service.beaconChain.port4 }}
+      targetPort: {{ .Values.service.beaconChain.port4 }}
+      protocol: TCP
+    - name: beacon-chain-port5
+      port: {{ .Values.service.beaconChain.port5 }}
+      targetPort: {{ .Values.service.beaconChain.port5 }}
+      protocol: TCP
+    - name: geth-port1
+      port: {{ .Values.service.geth.port1 }}
+      targetPort: {{ .Values.service.geth.port1 }}
+      protocol: TCP
+    - name: geth-port2
+      port: {{ .Values.service.geth.port2 }}
+      targetPort: {{ .Values.service.geth.port2 }}
+      protocol: TCP
+  selector:
+    {{- include "helm-beacon-chain.selectorLabels" . | nindent 4 }}
