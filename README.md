@@ -75,7 +75,7 @@ kubectl get svc
 
 Check the Connection:
 ```
-curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' http://123.456.789.101:8545
+curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' http://174.138.123.108:8545
 ```
 
 Please also, remember to create configmaps for:
