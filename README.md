@@ -1,7 +1,9 @@
 # Shanghai Blockchain
 
-Note: "UTC--2024-08-18T06-48-35.810191000Z--7d441d18b79898449be8b05d1077308bc563669c" this is a secret file, it is not to be exposed. When deploying the blockchain on staging, prod cluster, create a new keystore file `geth account new --datadir account1` to replace this one and add it as a kubernetes secret. Find more details in "configmaps" folder's readme file and "mqube-blockchain-accounts" folder's readme file.
-
+Create a new account
+```
+geth account new --datadir account1
+```
 
 Switch Between Kubernetes Environments
 ```
@@ -20,15 +22,15 @@ kubectl get pods
 
 Get Logs
 ```
-kubectl logs blockchain-shanghai-7d74f944fd-rps87 -c create-beacon-chain-genesis -n default
+kubectl logs blockchain-shanghai-7cb49d5dbd-xd8tc -c create-beacon-chain-genesis -n default
 ```
 
 ```
-kubectl logs blockchain-shanghai-7d74f944fd-rps87 -c geth-remove-db -n default
+kubectl logs blockchain-shanghai-7cb49d5dbd-xd8tc -c geth-remove-db -n default
 ```
 
 ```
-kubectl logs blockchain-shanghai-7d74f944fd-rps87 -c geth-genesis -n default
+kubectl logs blockchain-shanghai-7cb49d5dbd-xd8tc -c geth-genesis -n default
 ```
 
 Create a ConfigMap
@@ -48,22 +50,32 @@ kubectl describe configmap consensus-config -n default
 
 Describe a Pod
 ```
-kubectl describe pod blockchain-shanghai-7d74f944fd-rps87 -n default
+kubectl describe pod blockchain-shanghai-7cb49d5dbd-xd8tc -n default
 ```
 
 Get BeaconChain Logs
 ```
-kubectl logs blockchain-shanghai-7d74f944fd-rps87 -c beacon-chain -n default
+kubectl logs blockchain-shanghai-7cb49d5dbd-xd8tc -c beacon-chain -n default
 ```
 
 Get Geth Logs
 ```
-kubectl logs blockchain-shanghai-7d74f944fd-rps87 -c geth -n default
+kubectl logs blockchain-shanghai-7cb49d5dbd-xd8tc -c geth -n default
 ```
 
 Get Validator Logs
 ```
-kubectl logs blockchain-shanghai-7d74f944fd-rps87 -c validator -n default
+kubectl logs blockchain-shanghai-7cb49d5dbd-xd8tc -c validator -n default
+```
+
+Check the External IP of the LoadBalancer:
+```
+kubectl get svc
+```
+
+Check the Connection:
+```
+curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' http://123.456.789.101:8545
 ```
 
 Please also, remember to create configmaps for:
