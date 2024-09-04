@@ -6,7 +6,7 @@ metadata:
   labels:
     {{- include "helm-beacon-chain.labels" . | nindent 4 }}
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
     - name: beacon-chain-port1
       port: {{ .Values.service.beaconChain.port1 }}

@@ -18,7 +18,7 @@ initGenesisContainer:
         limits:
             cpu: "100m"
             memory: "256Mi"
-    args: ["testnet", "generate-genesis", "--fork=capella", "--num-validators=64", "--genesis-time-delay=300", "--output-ssz=/consensus/genesis.ssz", "--chain-config-file=/consensus/config.yml", "--geth-genesis-json-in=/execution/genesis.json", "--geth-genesis-json-out=/execution/genesis.json"]
+    args: ["testnet", "generate-genesis", "--fork=capella", "--num-validators=64", "--genesis-time-delay=10", "--output-ssz=/consensus/genesis.ssz", "--chain-config-file=/consensus/config.yml", "--geth-genesis-json-in=/execution/genesis.json", "--geth-genesis-json-out=/execution/genesis.json"]
     volumeMounts: 
         consensus:
             mountPath: "/consensus"
