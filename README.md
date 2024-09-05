@@ -22,15 +22,15 @@ kubectl get pods
 
 Get Logs
 ```
-kubectl logs blockchain-shanghai-7cb49d5dbd-xd8tc -c create-beacon-chain-genesis -n default
+kubectl logs blockchain-shanghai-6c99f6b59f-dp475 -c create-beacon-chain-genesis -n default
 ```
 
 ```
-kubectl logs blockchain-shanghai-7cb49d5dbd-xd8tc -c geth-remove-db -n default
+kubectl logs blockchain-shanghai-6c99f6b59f-dp475 -c geth-remove-db -n default
 ```
 
 ```
-kubectl logs blockchain-shanghai-7cb49d5dbd-xd8tc -c geth-genesis -n default
+kubectl logs blockchain-shanghai-6c99f6b59f-dp475 -c geth-genesis -n default
 ```
 
 Create a ConfigMap
@@ -50,22 +50,22 @@ kubectl describe configmap consensus-config -n default
 
 Describe a Pod
 ```
-kubectl describe pod blockchain-shanghai-7cb49d5dbd-xd8tc -n default
+kubectl describe pod blockchain-shanghai-6c99f6b59f-dp475 -n default
 ```
 
 Get BeaconChain Logs
 ```
-kubectl logs blockchain-shanghai-7cb49d5dbd-xd8tc -c beacon-chain -n default
+kubectl logs blockchain-shanghai-6c99f6b59f-dp475 -c beacon-chain -n default
 ```
 
 Get Geth Logs
 ```
-kubectl logs blockchain-shanghai-7cb49d5dbd-xd8tc -c geth -n default
+kubectl logs blockchain-shanghai-6c99f6b59f-dp475 -c geth -n default
 ```
 
 Get Validator Logs
 ```
-kubectl logs blockchain-shanghai-7cb49d5dbd-xd8tc -c validator -n default
+kubectl logs blockchain-shanghai-6c99f6b59f-dp475 -c validator -n default
 ```
 
 Check the External IP of the LoadBalancer:
@@ -75,7 +75,7 @@ kubectl get svc
 
 Check the Connection:
 ```
-curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' http://174.138.123.108:8545
+curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' http://139.59.49.4:8545
 ```
 
 Please also, remember to create configmaps for:
