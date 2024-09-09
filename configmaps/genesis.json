@@ -1,6 +1,6 @@
 {
 	"config": {
-		"chainId": 10319988,
+		"chainId": 310795,
 		"homesteadBlock": 0,
 		"daoForkSupport": true,
 		"eip150Block": 0,
@@ -29,69 +29,6 @@
 	"coinbase": "0x0000000000000000000000000000000000000000",
 	"alloc": {
 		"7d441d18b79898449be8b05d1077308bc563669c": {
-			"balance": "0xd3c21bcecceda1000000"
-		},
-		"A9df631129D0478c8388dBC8C81ac3071E6729F2": {
-			"balance": "0xd3c21bcecceda1000000"
-		},
-		"38529CA9ba9355cC76ba1a19Eb6eE59CBc3df635": {
-			"balance": "0xd3c21bcecceda1000000"
-		},
-		"fc7BA09c215792D9af92a4B287Cef9a8B4bc5929": {
-			"balance": "0xd3c21bcecceda1000000"
-		},
-		"0fa20c5365e8661ca0EACD0f88A1e8aaD4d131c5": {
-			"balance": "0xd3c21bcecceda1000000"
-		},
-		"6a7F18B474c442bE4Bfd5cA663108FEdC1988F5e": {
-			"balance": "0xd3c21bcecceda1000000"
-		},
-		"2544038c1ea1acE007C0643b77af33dfb7f332df": {
-			"balance": "0xd3c21bcecceda1000000"
-		},
-		"5334CB305A53AEd0700c8B598a3F41f8bcb012Fa": {
-			"balance": "0xd3c21bcecceda1000000"
-		},
-		"Ca642E93D146B6d6f68d8658B180785609fD0589": {
-			"balance": "0xd3c21bcecceda1000000"
-		},
-		"4Fc9F7f10800b27a32475D813efCA4D19328c8a9": {
-			"balance": "0xd3c21bcecceda1000000"
-		},
-		"2b9b9aF41Ccb41f09B0Cc46466fc87a27533f203": {
-			"balance": "0xd3c21bcecceda1000000"
-		},
-		"2BEA6c70CaEEC01c6FBE218932cb95B4EbF6539F": {
-			"balance": "0xd3c21bcecceda1000000"
-		},
-		"c70189e0E160F18cBc1FcDe08265cb295D644876": {
-			"balance": "0xd3c21bcecceda1000000"
-		},
-		"3745A4DacbBc07c3E196692140EA903E17166034": {
-			"balance": "0xd3c21bcecceda1000000"
-		},
-		"86335AA97eb85DBB675b6572d95F498Dc1b87d74": {
-			"balance": "0xd3c21bcecceda1000000"
-		},
-		"bE76cEa49b0137B7d09ad33E03A779223c20bD1e": {
-			"balance": "0xd3c21bcecceda1000000"
-		},
-		"701422E10035790eA465f4e257416130e45B4800": {
-			"balance": "0xd3c21bcecceda1000000"
-		},
-		"3C304Ef1f446aD6b09e8FeddEB735A12274A3479": {
-			"balance": "0xd3c21bcecceda1000000"
-		},
-		"D05Fb4D658f237F8AF08c017a7fFaDc0210FF9A2": {
-			"balance": "0xd3c21bcecceda1000000"
-		},
-		"829B06F853167748E43a9B3a0aBec851B94B393E": {
-			"balance": "0xd3c21bcecceda1000000"
-		},
-		"4935660Bd9d57438404Cbc14511DB1Ae5Bc412d4": {
-			"balance": "0xd3c21bcecceda1000000"
-		},
-		"B1301c1dcD0942b69D54F5Df2967Bc653A04ae9e": {
 			"balance": "0xd3c21bcecceda1000000"
 		},
 		"4242424242424242424242424242424242424242": {
