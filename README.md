@@ -27,15 +27,15 @@ kubectl describe node node-pool-1-b1x4t
 
 Get Logs
 ```
-kubectl logs blockchain-shanghai-d45858c7f-v8vvz -c create-beacon-chain-genesis -n default
+kubectl logs blockchain-shanghai-6c5c5c87b7-h94dm -c create-beacon-chain-genesis -n default
 ```
 
 ```
-kubectl logs blockchain-shanghai-d45858c7f-v8vvz -c geth-remove-db -n default
+kubectl logs blockchain-shanghai-6c5c5c87b7-h94dm -c geth-remove-db -n default
 ```
 
 ```
-kubectl logs blockchain-shanghai-d45858c7f-v8vvz -c geth-genesis -n default
+kubectl logs blockchain-shanghai-6c5c5c87b7-h94dm -c geth-genesis -n default
 ```
 
 Create a ConfigMap
@@ -55,22 +55,22 @@ kubectl describe configmap consensus-config -n default
 
 Describe a Pod
 ```
-kubectl describe pod blockchain-shanghai-d45858c7f-v8vvz -n default
+kubectl describe pod blockchain-shanghai-6c5c5c87b7-h94dm -n default
 ```
 
 Get BeaconChain Logs
 ```
-kubectl logs blockchain-shanghai-d45858c7f-v8vvz -c beacon-chain -n default
+kubectl logs blockchain-shanghai-6c5c5c87b7-h94dm -c beacon-chain -n default
 ```
 
 Get Geth Logs
 ```
-kubectl logs blockchain-shanghai-d45858c7f-v8vvz -c geth -n default
+kubectl logs blockchain-shanghai-6c5c5c87b7-h94dm -c geth -n default
 ```
 
 Get Validator Logs
 ```
-kubectl logs blockchain-shanghai-d45858c7f-v8vvz -c validator -n default
+kubectl logs blockchain-shanghai-6c5c5c87b7-h94dm -c validator -n default
 ```
 
 Check the External IP of the LoadBalancer:
