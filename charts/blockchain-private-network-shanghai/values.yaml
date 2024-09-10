@@ -61,8 +61,8 @@ gethContainer:
   imagePullPolicy: IfNotPresent
   resources:
     requests:
-      cpu: "65m"
-      memory: "300Mi"
+      cpu: "250m"
+      memory: "256Mi"
   args: ["--http","--http.api=eth,net,web3","--http.addr=0.0.0.0","--http.corsdomain=*","--ws","--ws.api=eth,net,web3","--ws.addr=0.0.0.0","--ws.origins=*","--authrpc.vhosts=*","--authrpc.addr=0.0.0.0","--authrpc.jwtsecret=/execution/jwtsecret","--datadir=/execution","--allow-insecure-unlock","--unlock=0x7d441d18b79898449be8b05d1077308bc563669c","--password=/execution/geth_password.txt","--nodiscover","--syncmode=full", "--ipcdisable"]
   ports:
     - 8551:8551
@@ -80,8 +80,8 @@ beaconChainContainer:
   imagePullPolicy: IfNotPresent
   resources:
     requests:
-      cpu: "65m"
-      memory: "300Mi"
+      cpu: "250m"
+      memory: "256Mi"
   args: ["--datadir=/consensus/beacondata", "--min-sync-peers=0", "--genesis-state=/consensus/genesis.ssz", "--bootstrap-node=", "--interop-eth1data-votes", "--chain-config-file=/consensus/config.yml", "--contract-deployment-block=0", "--chain-id=310795", "--rpc-host=0.0.0.0", "--grpc-gateway-host=0.0.0.0", "--execution-endpoint=http://localhost:8551", "--accept-terms-of-use", "--jwt-secret=/execution/jwtsecret", "--suggested-fee-recipient=0x7d441d18b79898449be8b05d1077308bc563669c", "--minimum-peers-per-subnet=0","--enable-debug-rpc-endpoints", "--force-clear-db"]
   ports:
     - 4000:4000
@@ -104,8 +104,8 @@ validatorContainer:
   imagePullPolicy: IfNotPresent
   resources:
     requests:
-      cpu: "15m"
-      memory: "150Mi"
+      cpu: "250m"
+      memory: "256Mi"
   args: ["--beacon-rpc-provider=localhost:4000","--datadir=/consensus/validatordata","--accept-terms-of-use","--interop-num-validators=64","--interop-start-index=0","--chain-config-file=/consensus/config.yml","--force-clear-db"]
   volumeMounts: 
     consensus:
