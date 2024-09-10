@@ -1,5 +1,5 @@
-CONFIG_NAME: mqube
-PRESET_BASE: mqube
+CONFIG_NAME: genesiscipherlabs
+PRESET_BASE: genesiscipherlabs
 
 # Genesis
 GENESIS_FORK_VERSION: 0x20319988
