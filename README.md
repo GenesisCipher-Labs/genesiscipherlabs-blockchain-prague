@@ -80,19 +80,26 @@ kubectl get svc
 
 Check the Connection:
 ```
-curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' http://144.126.252.27:8545
+curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' http://174.138.120.108:8545
 ```
+
 
 Please also, remember to create configmaps for:
 1. genesis.json file (execution-genesis)
 2. config.yml file (consensus-config)
 3. The keystore file (geth-keystore)
 4. The keystore password (geth-password)
+5. The ETH2.0 Deposit Contract (shanghai-deposit-contract)
+
 
 Create ConfigMaps:
 
 ```
 kubectl create configmap consensus-config --from-file=config.yml=config.yml -n default --dry-run=client -o yaml | kubectl apply -f -
+```
+
+```
+kubectl create configmap shanghai-deposit-contract --from-file=DepositContract.sol=DepositContract.sol -n default --dry-run=client -o yaml | kubectl apply -f -
 ```
 
 ```
@@ -105,8 +112,4 @@ kubectl create configmap geth-keystore --from-file=UTC--2024-08-18T06-48-35.8101
 
 ```
 kubectl create configmap geth-password --from-file=geth_password.txt=geth_password.txt -n default --dry-run=client -o yaml | kubectl apply -f -
-```
-
-```
-export KUBECONFIG=/Users/vidhanmangla/Downloads/blockchain-and-oracle-kubeconfig.yaml
 ```
