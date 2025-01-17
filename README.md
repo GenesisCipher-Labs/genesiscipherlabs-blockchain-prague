@@ -7,18 +7,18 @@ geth account new --datadir account1
 kubectl config get-contexts
 
 ## Create ConfigMaps:
-kubectl create configmap execution-genesis --from-file=genesis.json=genesis.json -n default --dry-run=client -o yaml | kubectl apply -f -
-kubectl create configmap consensus-config --from-file=config.yml=config.yml -n default --dry-run=client -o yaml | kubectl apply -f -
-kubectl create configmap geth-keystore --from-file=UTC--2024-08-18T06-48-35.810191000Z--7d441d18b79898449be8b05d1077308bc563669c=UTC--2024-08-18T06-48-35.810191000Z--7d441d18b79898449be8b05d1077308bc563669c -n default --dry-run=client -o yaml | kubectl apply -f -
-kubectl create configmap geth-password --from-file=geth_password.txt=geth_password.txt -n default --dry-run=client -o yaml | kubectl apply -f -
-kubectl create configmap shanghai-deposit-contract --from-file=DepositContract.sol=DepositContract.sol -n default --dry-run=client -o yaml | kubectl apply -f -
+1. kubectl create configmap execution-genesis --from-file=genesis.json=genesis.json -n default --dry-run=client -o yaml | kubectl apply -f -
+2. kubectl create configmap consensus-config --from-file=config.yml=config.yml -n default --dry-run=client -o yaml | kubectl apply -f -
+3. kubectl create configmap geth-keystore --from-file=UTC--2024-08-18T06-48-35.810191000Z--7d441d18b79898449be8b05d1077308bc563669c=UTC--2024-08-18T06-48-35.810191000Z--7d441d18b79898449be8b05d1077308bc563669c -n default --dry-run=client -o yaml | kubectl apply -f -
+4. kubectl create configmap geth-password --from-file=geth_password.txt=geth_password.txt -n default --dry-run=client -o yaml | kubectl apply -f -
+5. kubectl create configmap shanghai-deposit-contract --from-file=DepositContract.sol=DepositContract.sol -n default --dry-run=client -o yaml | kubectl apply -f -
 
 ## Delete a ConfigMap
-kubectl delete configmap execution-genesis -n default
-kubectl delete configmap consensus-config -n default
-kubectl delete configmap geth-keystore -n default
-kubectl delete configmap geth-password -n default
-kubectl delete configmap shanghai-deposit-contract -n default
+1. kubectl delete configmap execution-genesis -n default
+2. kubectl delete configmap consensus-config -n default
+3. kubectl delete configmap geth-keystore -n default
+4. kubectl delete configmap geth-password -n default
+5. kubectl delete configmap shanghai-deposit-contract -n default
 
 ## Describe a ConfigMap
 kubectl describe configmap consensus-config -n default
