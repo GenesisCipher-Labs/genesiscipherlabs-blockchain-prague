@@ -57,5 +57,6 @@ kubectl get svc
 
 ## Check the Connection:
 curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' http://174.138.120.108:8545
+
 ## Grafana Token
 glc_eyJvIjoiMTIyNTg0MCIsIm4iOiJzdGFjay0xMDQxOTA1LWludGVncmF0aW9uLWs4cy10b2tlbi1rOHMtdG9rZW4iLCJrIjoiNGpQVjUyVjI4WDNnQXN2RnM0SUQzZjUzIiwibSI6eyJyIjoicHJvZC1hcC1zb3V0aC0xIn19
