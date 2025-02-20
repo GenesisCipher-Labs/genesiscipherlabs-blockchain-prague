@@ -73,4 +73,4 @@ kubectl get svc
 curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' http://139.59.55.182:8545
 
 ## Grafana Token
-glc_eyJvIjoiMTIyNTg0MCIsIm4iOiJzdGFjay0xMDQxOTA1LWludGVncmF0aW9uLWs4cy10b2tlbi1rOHMtdG9rZW4iLCJrIjoiNGpQVjUyVjI4WDNnQXN2RnM0SUQzZjUzIiwibSI6eyJyIjoicHJvZC1hcC1zb3V0aC0xIn19
+glc_eyJvIjoiMTIyNTg0MCIsIm4iOiJzdGFjay0xMDQxOTA1LWludGVncmF0aW9uLXByb2QtY2x1c3Rlci10b2tlbi1wcm9kLWNsdXN0ZXItdG9rZW4iLCJrIjoibTc4OTZSZ2JqWlpYOHkxNDZQUDFpSk8yIiwibSI6eyJyIjoicHJvZC1hcC1zb3V0aC0xIn19
