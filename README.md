@@ -6,23 +6,8 @@ geth account new --datadir account1
 ## Switch Between Kubernetes Environments
 kubectl config get-contexts
 
-## Add Kubernetes Environments
-kubectl --kubeconfig=/Users/vidhanmangla/Downloads/k8s-staging-kubeconfig.yaml get nodes
-```
-export KUBECONFIG=~/.kube/config:/Users/vidhanmangla/Downloads/k8s-staging-kubeconfig.yaml
-kubectl config view --merge --flatten > /tmp/merged_kubeconfig
-mv /tmp/merged_kubeconfig ~/.kube/config
-```
-
-kubectl --kubeconfig=/Users/vidhanmangla/Downloads/k8s-prod-kubeconfig.yaml get nodes
-```
-export KUBECONFIG=~/.kube/config:/Users/vidhanmangla/Downloads/k8s-prod-kubeconfig.yaml
-kubectl config view --merge --flatten > /tmp/merged_kubeconfig
-mv /tmp/merged_kubeconfig ~/.kube/config
-```
-
 ## Create ConfigMaps:
-cd configmaps && kubectl create configmap execution-genesis --from-file=genesis.json=genesis.json -n default --dry-run=client -o yaml | kubectl apply -f - && cd ..
+1. '''cd configmaps && kubectl create configmap execution-genesis --from-file=genesis.json=genesis.json -n default --dry-run=client -o yaml | kubectl apply -f - && cd ..'''
 cd configmaps && kubectl create configmap consensus-config --from-file=config.yml=config.yml -n default --dry-run=client -o yaml | kubectl apply -f - && cd ..
 cd configmaps && kubectl create configmap geth-keystore --from-file=UTC--2024-08-18T06-48-35.810191000Z--7d441d18b79898449be8b05d1077308bc563669c=UTC--2024-08-18T06-48-35.810191000Z--7d441d18b79898449be8b05d1077308bc563669c -n default --dry-run=client -o yaml | kubectl apply -f - && cd ..
 cd configmaps && kubectl create configmap geth-password --from-file=geth_password.txt=geth_password.txt -n default --dry-run=client -o yaml | kubectl apply -f - && cd ..
@@ -71,6 +56,3 @@ kubectl get svc
 
 ## Check the Connection:
 curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' http://139.59.55.182:8545
-
-## Grafana Token
-glc_eyJvIjoiMTIyNTg0MCIsIm4iOiJzdGFjay0xMDQxOTA1LWludGVncmF0aW9uLXByb2QtY2x1c3Rlci10b2tlbi1wcm9kLWNsdXN0ZXItdG9rZW4iLCJrIjoibTc4OTZSZ2JqWlpYOHkxNDZQUDFpSk8yIiwibSI6eyJyIjoicHJvZC1hcC1zb3V0aC0xIn19
