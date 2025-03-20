@@ -1,58 +1,126 @@
 # Shanghai Blockchain
 
-## Create a new account
-- geth account new --datadir account1
+## Overview
 
-## Switch Between Kubernetes Environments
-- kubectl config get-contexts
+This project sets up a private blockchain network for the Shanghai environment using Kubernetes and Helm. It leverages Ethereum's Geth client along with Prysm's beacon chain, validator, and genesis generation tools to create a blockchain network that is easy to deploy, manage, and troubleshoot in a containerized environment.
 
-## Create ConfigMaps:
-- cd configmaps && kubectl create configmap execution-genesis --from-file=genesis.json=genesis.json -n default --dry-run=client -o yaml | kubectl apply -f - && cd ..
-- cd configmaps && kubectl create configmap consensus-config --from-file=config.yml=config.yml -n default --dry-run=client -o yaml | kubectl apply -f - && cd ..
-- cd configmaps && kubectl create configmap geth-keystore --from-file=UTC--2024-08-18T06-48-35.810191000Z--7d441d18b79898449be8b05d1077308bc563669c=UTC--2024-08-18T06-48-35.810191000Z--7d441d18b79898449be8b05d1077308bc563669c -n default --dry-run=client -o yaml | kubectl apply -f - && cd ..
-- cd configmaps && kubectl create configmap geth-password --from-file=geth_password.txt=geth_password.txt -n default --dry-run=client -o yaml | kubectl apply -f - && cd ..
-- cd configmaps && kubectl create configmap shanghai-deposit-contract --from-file=DepositContract.sol=DepositContract.sol -n default --dry-run=client -o yaml | kubectl apply -f - && cd ..
+## Architecture
 
-## Delete a ConfigMap
-- kubectl delete configmap execution-genesis -n default
-- kubectl delete configmap consensus-config -n default
-- kubectl delete configmap geth-keystore -n default
-- kubectl delete configmap geth-password -n default
-- kubectl delete configmap shanghai-deposit-contract -n default
- 
-## Describe a ConfigMap
-- kubectl describe configmap consensus-config -n default
+The deployment is managed via a Helm chart and consists of several key components:
 
-## Install Chart
-- helm install genesiscipherlabs-shanghai-blockchain charts/blockchain-private-network-shanghai
+- **Genesis Initialization:**
+  - **`create-beacon-chain-genesis` container:** Uses Prysm's CLI tool (`prysmctl`) to generate the genesis state.
 
-## Uninstall Chart
-- helm uninstall genesiscipherlabs-shanghai-blockchain
+- **Geth Initialization:**
+  - **`geth-remove-db` container:** Removes any pre-existing Geth database to ensure a clean state.
+  - **`geth-genesis` container:** Initializes Geth using the generated genesis file.
 
-## Get Pods
-- kubectl get pods
+- **Execution & Consensus Layers:**
+  - **`geth` container:** Runs the Ethereum client for executing transactions.
+  - **`beacon-chain` container:** Runs Prysm's beacon chain, responsible for consensus and network synchronization.
+  - **`validator` container:** Runs the Prysm validator to participate in block validation.
 
-## Get Node Info:
-- kubectl describe node node-pool-1-b1x4t
+Configuration is managed via Kubernetes ConfigMaps that store critical files such as the genesis state, chain configuration, keystore, and password files.
 
-## Get Logs
-- kubectl logs blockchain-shanghai-8df9d74c8-7d6dk -c create-beacon-chain-genesis -n default
-- kubectl logs blockchain-shanghai-8df9d74c8-7d6dk -c geth-genesis -n default
+## Prerequisites
 
-## Describe a Pod
-- kubectl describe pod blockchain-shanghai-8df9d74c8-7d6dk -n default
+- A Kubernetes cluster (local or remote)
+- Helm installed
+- kubectl installed and configured
+- Docker or another container runtime
+- Basic understanding of Ethereum and blockchain concepts
 
-## Get BeaconChain Logs
-- kubectl logs blockchain-shanghai-8df9d74c8-7d6dk -c beacon-chain -n default
+## Setup and Deployment
 
-## Get Geth Logs
-- kubectl logs blockchain-shanghai-8df9d74c8-7d6dk -c geth -n default
+1. **Create and Configure ConfigMaps**
+   - Navigate to the `configmaps` directory and run the commands to create ConfigMaps for the genesis file, chain configuration, keystore, geth password, and deposit contract. 
 
-## Get Validator Logs
-- kubectl logs blockchain-shanghai-8df9d74c8-7d6dk -c validator -n default
+2. **Deploy the Blockchain Network**
+   - Install the Helm chart:
+     ```bash
+     helm install genesiscipherlabs-shanghai-blockchain charts/blockchain-private-network-shanghai
+     ```
+   - Monitor the deployment with:
+     ```bash
+     kubectl get pods
+     ```
 
-## Check the External IP of the LoadBalancer:
-- kubectl get svc
+3. **Troubleshooting and Logs**
+   - To debug issues, use commands such as:
+     ```bash
+     kubectl describe pod <pod-name>
+     kubectl logs <pod-name> -c <container-name>
+     ```
 
-## Check the Connection:
-- curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' http://139.59.55.182:8545
+4. **Interacting with the Network**
+   - Create new Ethereum accounts using Geth.
+   - Switch between Kubernetes contexts as needed.
+   - Use the provided endpoints and services to interact with the network.
+
+## Project Structure
+
+- **charts/**: Contains the Helm chart for deploying the blockchain network.
+- **configmaps/**: Contains configuration files and keys needed for initialization.
+- **README.md**: This documentation file.
+- **Other Files**: Utility scripts (e.g., for key decryption) and source code supporting the setup.
+
+---
+
+## Cheats
+
+### Create a New Account
+- `geth account new --datadir account1`
+
+### Switch Between Kubernetes Environments
+- `kubectl config get-contexts`
+
+### Create ConfigMaps:
+- `cd configmaps && kubectl create configmap execution-genesis --from-file=genesis.json=genesis.json -n default --dry-run=client -o yaml | kubectl apply -f - && cd ..`
+- `cd configmaps && kubectl create configmap consensus-config --from-file=config.yml=config.yml -n default --dry-run=client -o yaml | kubectl apply -f - && cd ..`
+- `cd configmaps && kubectl create configmap geth-keystore --from-file=UTC--2024-08-18T06-48-35.810191000Z--7d441d18b79898449be8b05d1077308bc563669c=UTC--2024-08-18T06-48-35.810191000Z--7d441d18b79898449be8b05d1077308bc563669c -n default --dry-run=client -o yaml | kubectl apply -f - && cd ..`
+- `cd configmaps && kubectl create configmap geth-password --from-file=geth_password.txt=geth_password.txt -n default --dry-run=client -o yaml | kubectl apply -f - && cd ..`
+- `cd configmaps && kubectl create configmap shanghai-deposit-contract --from-file=DepositContract.sol=DepositContract.sol -n default --dry-run=client -o yaml | kubectl apply -f - && cd ..`
+
+### Delete a ConfigMap
+- `kubectl delete configmap execution-genesis -n default`
+- `kubectl delete configmap consensus-config -n default`
+- `kubectl delete configmap geth-keystore -n default`
+- `kubectl delete configmap geth-password -n default`
+- `kubectl delete configmap shanghai-deposit-contract -n default`
+
+### Describe a ConfigMap
+- `kubectl describe configmap consensus-config -n default`
+
+### Install Chart
+- `helm install genesiscipherlabs-shanghai-blockchain charts/blockchain-private-network-shanghai`
+
+### Uninstall Chart
+- `helm uninstall genesiscipherlabs-shanghai-blockchain`
+
+### Get Pods
+- `kubectl get pods`
+
+### Get Node Info
+- `kubectl describe node node-pool-1-b1x4t`
+
+### Get Logs
+- `kubectl logs blockchain-shanghai-8df9d74c8-7d6dk -c create-beacon-chain-genesis -n default`
+- `kubectl logs blockchain-shanghai-8df9d74c8-7d6dk -c geth-genesis -n default`
+
+### Describe a Pod
+- `kubectl describe pod blockchain-shanghai-8df9d74c8-7d6dk -n default`
+
+### Get BeaconChain Logs
+- `kubectl logs blockchain-shanghai-8df9d74c8-7d6dk -c beacon-chain -n default`
+
+### Get Geth Logs
+- `kubectl logs blockchain-shanghai-8df9d74c8-7d6dk -c geth -n default`
+
+### Get Validator Logs
+- `kubectl logs blockchain-shanghai-8df9d74c8-7d6dk -c validator -n default`
+
+### Check the External IP of the LoadBalancer
+- `kubectl get svc`
+
+### Check the Connection
+- `curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' http://139.59.55.182:8545`
