@@ -36,20 +36,20 @@
 - kubectl describe node node-pool-1-b1x4t
 
 ## Get Logs
-- kubectl logs blockchain-shanghai-7499f7d585-kz95r -c create-beacon-chain-genesis -n default
-- kubectl logs blockchain-shanghai-7499f7d585-kz95r -c geth-genesis -n default
+- kubectl logs blockchain-shanghai-8df9d74c8-7d6dk -c create-beacon-chain-genesis -n default
+- kubectl logs blockchain-shanghai-8df9d74c8-7d6dk -c geth-genesis -n default
 
 ## Describe a Pod
-- kubectl describe pod blockchain-shanghai-7499f7d585-kz95r -n default
+- kubectl describe pod blockchain-shanghai-8df9d74c8-7d6dk -n default
 
 ## Get BeaconChain Logs
-- kubectl logs blockchain-shanghai-7499f7d585-kz95r -c beacon-chain -n default
+- kubectl logs blockchain-shanghai-8df9d74c8-7d6dk -c beacon-chain -n default
 
 ## Get Geth Logs
-- kubectl logs blockchain-shanghai-7499f7d585-kz95r -c geth -n default
+- kubectl logs blockchain-shanghai-8df9d74c8-7d6dk -c geth -n default
 
 ## Get Validator Logs
-- kubectl logs blockchain-shanghai-7499f7d585-kz95r -c validator -n default
+- kubectl logs blockchain-shanghai-8df9d74c8-7d6dk -c validator -n default
 
 ## Check the External IP of the LoadBalancer:
 - kubectl get svc
