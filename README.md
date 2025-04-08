@@ -1,5 +1,8 @@
 # Shanghai Blockchain
 
+## Note
+We plan to keep this repository up to date with the Ethereum protocol-thus maintaining a mainnet‐fork environment to test protocols.
+
 ## Overview
 
 This project sets up a private blockchain network for the Shanghai environment using Kubernetes and Helm. It leverages Ethereum's Geth client along with Prysm's beacon chain, validator, and genesis generation tools to create a blockchain network that is easy to deploy, manage, and troubleshoot in a containerized environment.
