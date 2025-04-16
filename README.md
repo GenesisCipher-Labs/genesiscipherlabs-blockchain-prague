@@ -1,7 +1,7 @@
 # Shanghai Blockchain
 
 ## Note
-We plan to keep this repository up to date with the Ethereum protocol-thus maintaining a mainnet‐fork environment to test protocols.
+We plan to keep this repository up to date with the Ethereum protocol-thus maintaining a mainnet‐fork environment to test DApps and protocols.
 
 ## Overview
 
