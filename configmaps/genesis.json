@@ -22,6 +22,11 @@
 				"target": 3,
 				"max": 6,
 				"baseFeeUpdateFraction": 3338477
+			},
+			"prague": {
+				"target": 3,
+				"max": 6,
+				"baseFeeUpdateFraction": 3338477
 			}
 		},
 		"terminalTotalDifficulty": 0,

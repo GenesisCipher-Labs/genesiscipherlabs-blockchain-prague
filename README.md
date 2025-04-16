@@ -107,20 +107,20 @@ Configuration is managed via Kubernetes ConfigMaps that store critical files suc
 - `kubectl describe node node-pool-1-b1x4t`
 
 ### Get Logs
-- `kubectl logs blockchain-shanghai-8df9d74c8-7d6dk -c create-beacon-chain-genesis -n default`
-- `kubectl logs blockchain-shanghai-8df9d74c8-7d6dk -c geth-genesis -n default`
+- `kubectl logs blockchain-shanghai-865549554c-ds9jf -c create-beacon-chain-genesis -n default`
+- `kubectl logs blockchain-shanghai-865549554c-ds9jf -c geth-genesis -n default`
 
 ### Describe a Pod
-- `kubectl describe pod blockchain-shanghai-8df9d74c8-7d6dk -n default`
+- `kubectl describe pod blockchain-shanghai-865549554c-ds9jf -n default`
 
 ### Get BeaconChain Logs
-- `kubectl logs blockchain-shanghai-8df9d74c8-7d6dk -c beacon-chain -n default`
+- `kubectl logs blockchain-shanghai-865549554c-ds9jf -c beacon-chain -n default`
 
 ### Get Geth Logs
-- `kubectl logs blockchain-shanghai-8df9d74c8-7d6dk -c geth -n default`
+- `kubectl logs blockchain-shanghai-865549554c-ds9jf -c geth -n default`
 
 ### Get Validator Logs
-- `kubectl logs blockchain-shanghai-8df9d74c8-7d6dk -c validator -n default`
+- `kubectl logs blockchain-shanghai-865549554c-ds9jf -c validator -n default`
 
 ### Check the External IP of the LoadBalancer
 - `kubectl get svc`
