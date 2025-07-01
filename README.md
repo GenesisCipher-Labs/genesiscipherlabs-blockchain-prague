@@ -94,8 +94,14 @@ Configuration is managed via Kubernetes ConfigMaps that store critical files suc
 ### Describe a ConfigMap
 - `kubectl describe configmap consensus-config -n default`
 
+### Use Linter
+- `helm lint charts/blockchain-private-network-shanghai`
+
 ### Install Chart
 - `helm install genesiscipherlabs-shanghai-blockchain charts/blockchain-private-network-shanghai`
+
+### Watch the rollout
+- `kubectl rollout status deployment/blockchain-shanghai --namespace default`
 
 ### Uninstall Chart
 - `helm uninstall genesiscipherlabs-shanghai-blockchain`
@@ -107,23 +113,23 @@ Configuration is managed via Kubernetes ConfigMaps that store critical files suc
 - `kubectl describe node node-pool-1-b1x4t`
 
 ### Get Logs
-- `kubectl logs blockchain-shanghai-7b6c9c8654-ngg87 -c create-beacon-chain-genesis -n default`
-- `kubectl logs blockchain-shanghai-7b6c9c8654-ngg87 -c geth-genesis -n default`
+- `kubectl logs blockchain-shanghai-79c9bb556f-jds99 -c create-beacon-chain-genesis -n default`
+- `kubectl logs blockchain-shanghai-79c9bb556f-jds99 -c geth-genesis -n default`
 
 ### Describe a Pod
-- `kubectl describe pod blockchain-shanghai-7b6c9c8654-ngg87 -n default`
+- `kubectl describe pod blockchain-shanghai-79c9bb556f-jds99 -n default`
 
 ### Get BeaconChain Logs
-- `kubectl logs blockchain-shanghai-7b6c9c8654-ngg87 -c beacon-chain -n default`
+- `kubectl logs blockchain-shanghai-79c9bb556f-jds99 -c beacon-chain -n default`
 
 ### Get Geth Logs
-- `kubectl logs blockchain-shanghai-7b6c9c8654-ngg87 -c geth -n default`
+- `kubectl logs blockchain-shanghai-79c9bb556f-jds99 -c geth -n default`
 
 ### Get Validator Logs
-- `kubectl logs blockchain-shanghai-7b6c9c8654-ngg87 -c validator -n default`
+- `kubectl logs blockchain-shanghai-79c9bb556f-jds99 -c validator -n default`
 
 ### Check the External IP of the LoadBalancer
 - `kubectl get svc`
 
 ### Check the Connection
-- `curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' http://139.59.55.182:8545`
+- `curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' http://209.38.124.64:8545`
