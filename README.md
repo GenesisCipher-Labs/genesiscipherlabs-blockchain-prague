@@ -1,11 +1,11 @@
-# Shanghai Blockchain
+# Prague Blockchain
 
 ## Note
 We plan to keep this repository up to date with the Ethereum protocol-thus maintaining a mainnet‐fork environment to test DApps and protocols.
 
 ## Overview
 
-This project sets up a private blockchain network for the Shanghai environment using Kubernetes and Helm. It leverages Ethereum's Geth client along with Prysm's beacon chain, validator, and genesis generation tools to create a blockchain network that is easy to deploy, manage, and troubleshoot in a containerized environment.
+This project sets up a private blockchain network for the Prague environment using Kubernetes and Helm. It leverages Ethereum's Geth client along with Prysm's beacon chain, validator, and genesis generation tools to create a blockchain network that is easy to deploy, manage, and troubleshoot in a containerized environment.
 
 ## Architecture
 
@@ -41,7 +41,7 @@ Configuration is managed via Kubernetes ConfigMaps that store critical files suc
 2. **Deploy the Blockchain Network**
    - Install the Helm chart:
      ```bash
-     helm install genesiscipherlabs-shanghai-blockchain charts/blockchain-private-network-shanghai
+     helm install genesiscipherlabs-prague-blockchain charts/blockchain-private-network-prague
      ```
    - Monitor the deployment with:
      ```bash
@@ -95,16 +95,16 @@ Configuration is managed via Kubernetes ConfigMaps that store critical files suc
 - `kubectl describe configmap consensus-config -n default`
 
 ### Use Linter
-- `helm lint charts/blockchain-private-network-shanghai`
+- `helm lint charts/blockchain-private-network-prague`
 
 ### Install Chart
-- `helm install genesiscipherlabs-shanghai-blockchain charts/blockchain-private-network-shanghai`
+- `helm install genesiscipherlabs-prague-blockchain charts/blockchain-private-network-prague`
 
 ### Watch the rollout
-- `kubectl rollout status deployment/blockchain-shanghai --namespace default`
+- `kubectl rollout status deployment/blockchain-prague --namespace default`
 
 ### Uninstall Chart
-- `helm uninstall genesiscipherlabs-shanghai-blockchain`
+- `helm uninstall genesiscipherlabs-prague-blockchain`
 
 ### Get Pods
 - `kubectl get pods`
@@ -113,23 +113,23 @@ Configuration is managed via Kubernetes ConfigMaps that store critical files suc
 - `kubectl describe node node-pool-1-b1x4t`
 
 ### Get Logs
-- `kubectl logs blockchain-shanghai-75799c8cf5-mlj4f -c create-beacon-chain-genesis -n default`
-- `kubectl logs blockchain-shanghai-75799c8cf5-mlj4f -c geth-genesis -n default`
+- `kubectl logs blockchain-prague-5d9bc95785-vjt8m -c create-beacon-chain-genesis -n default`
+- `kubectl logs blockchain-prague-5d9bc95785-vjt8m -c geth-genesis -n default`
 
 ### Describe a Pod
-- `kubectl describe pod blockchain-shanghai-75799c8cf5-mlj4f -n default`
+- `kubectl describe pod blockchain-prague-5d9bc95785-vjt8m -n default`
 
 ### Get BeaconChain Logs
-- `kubectl logs blockchain-shanghai-75799c8cf5-mlj4f -c beacon-chain -n default`
+- `kubectl logs blockchain-prague-5d9bc95785-vjt8m -c beacon-chain -n default`
 
 ### Get Geth Logs
-- `kubectl logs blockchain-shanghai-75799c8cf5-mlj4f -c geth -n default`
+- `kubectl logs blockchain-prague-5d9bc95785-vjt8m -c geth -n default`
 
 ### Get Validator Logs
-- `kubectl logs blockchain-shanghai-75799c8cf5-mlj4f -c validator -n default`
+- `kubectl logs blockchain-prague-5d9bc95785-vjt8m -c validator -n default`
 
 ### Check the External IP of the LoadBalancer
 - `kubectl get svc`
 
 ### Check the Connection
-- `curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' http://139.59.54.203:8545`
+- `curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' http://146.190.11.252:8545`
