@@ -163,9 +163,9 @@ spec:
           name: execution-genesis
 
       - name: geth-password
-        configMap:
-          name: geth-password
+        secret:
+          secretName: geth-password
 
       - name: geth-keystore
-        configMap:
-          name: geth-keystore
+        secret:
+          secretName: geth-keystore

@@ -75,7 +75,7 @@ gethContainer:
     limits:
       cpu: "50m"
       memory: "100Mi"
-  args: ["--http","--http.api=eth,net,web3","--http.addr=0.0.0.0","--http.corsdomain=*","--ws","--ws.api=eth,net,web3","--ws.addr=0.0.0.0","--ws.origins=*","--authrpc.vhosts=*","--authrpc.addr=0.0.0.0","--authrpc.jwtsecret=/execution/jwtsecret","--datadir=/execution","--allow-insecure-unlock","--unlock=0x7d441d18b79898449be8b05d1077308bc563669c","--password=/execution/geth_password.txt","--nodiscover","--syncmode=full", "--ipcdisable"]
+  args: ["--http","--http.api=eth,net,web3","--http.addr=0.0.0.0","--http.corsdomain=*","--ws","--ws.api=eth,net,web3","--ws.addr=0.0.0.0","--ws.origins=*","--authrpc.vhosts=*","--authrpc.addr=0.0.0.0","--authrpc.jwtsecret=/execution/jwtsecret","--datadir=/execution","--allow-insecure-unlock","--unlock=0x7d441d18b79898449be8b05d1077308bc563669c","--password=/secrets/password/geth_password.txt","--nodiscover","--syncmode=full", "--ipcdisable"]
   ports:
     - 8551:8551
     - 8545:8545
@@ -84,6 +84,14 @@ gethContainer:
     execution:
       mountPath: "/execution"
       name: execution
+    geth-password:
+      mountPath: "/secrets/password"
+      name: geth-password
+      readOnly: true
+    geth-keystore:
+      mountPath: "/execution/keystore"
+      name: geth-keystore
+      readOnly: true
 
 # for beacon chain
 beaconChainContainer:
@@ -135,6 +143,14 @@ volumes:
     name: consensus
   execution:
     name: execution
+  geth-password:
+    name: geth-password
+    secret:
+      secretName: geth-password
+  geth-keystore:
+    name: geth-keystore
+    secret:
+      secretName: geth-keystore
 
 service: 
   beaconChain:
