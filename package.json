@@ -2,5 +2,8 @@
   "name": "genesiscipherlabs-blockchain-prague",
   "dependencies": {
     "keythereum": "^2.0.0"
+  },
+  "scripts": {
+    "decrypt": "node decrypt_private_key.js"
   }
 }
