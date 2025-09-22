@@ -120,26 +120,26 @@ cd secrets && kubectl create secret generic geth-keystore \
 - `kubectl get pods`
 
 ### Get Node Info
-- `kubectl describe node node-pool-1-b1x4t`
+- `kubectl describe node pool-paid-215di`
 
 ### Get Logs
-- `kubectl logs blockchain-prague-5d9bc95785-vjt8m -c create-beacon-chain-genesis -n default`
-- `kubectl logs blockchain-prague-5d9bc95785-vjt8m -c geth-genesis -n default`
+- `kubectl logs blockchain-prague-6bb7dcddbf-7vszb -c create-beacon-chain-genesis -n default`
+- `kubectl logs blockchain-prague-6bb7dcddbf-7vszb -c geth-genesis -n default`
 
 ### Describe a Pod
-- `kubectl describe pod blockchain-prague-5d9bc95785-vjt8m -n default`
+- `kubectl describe pod blockchain-prague-6bb7dcddbf-7vszb -n default`
 
 ### Get BeaconChain Logs
-- `kubectl logs blockchain-prague-5d9bc95785-vjt8m -c beacon-chain -n default`
+- `kubectl logs blockchain-prague-6bb7dcddbf-7vszb -c beacon-chain -n default`
 
 ### Get Geth Logs
-- `kubectl logs blockchain-prague-5d9bc95785-vjt8m -c geth -n default`
+- `kubectl logs blockchain-prague-6bb7dcddbf-7vszb -c geth -n default`
 
 ### Get Validator Logs
-- `kubectl logs blockchain-prague-5d9bc95785-vjt8m -c validator -n default`
+- `kubectl logs blockchain-prague-6bb7dcddbf-7vszb -c validator -n default`
 
 ### Check the External IP of the LoadBalancer
 - `kubectl get svc`
 
 ### Check the Connection
-- `curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' http://146.190.11.252:8545`
+- `curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' http://174.138.121.228:8545`
